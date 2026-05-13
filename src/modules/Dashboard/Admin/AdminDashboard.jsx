@@ -4,7 +4,6 @@ import AdminTasksView from './AdminTasksView';
 import ActiveRegulations from '../Common/ActiveRegulations';
 import GeneralInfoBlock from '../Common/GeneralInfoBlock';
 
-// Додаємо userRole у деструктуризацію пропсів
 export default function AdminDashboard({ user, userRole }) {
     const navigate = useNavigate();
 
@@ -18,7 +17,6 @@ export default function AdminDashboard({ user, userRole }) {
                 </div>
             </header>
 
-            {/* ПЕРЕДАЄМО ПРОПСИ ТУТ: без них картки не знатимуть, чиї дані рахувати */}
             <GeneralInfoBlock user={user} userRole={userRole} />
 
             <ActiveRegulations userRole={userRole} currentUserId={user?.id} />
