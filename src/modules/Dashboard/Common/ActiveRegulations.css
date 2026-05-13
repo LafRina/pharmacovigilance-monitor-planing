@@ -1,0 +1,203 @@
+.regulations-container {
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.regulations-table tr {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Колір для "Виконано" (зелений) */
+.status-done {
+    background-color: #C6F6D5;
+    color: #22543D;
+}
+
+/* Колір для "У роботі" (блакитний/синій) */
+.status-process {
+    background-color: #BEE3F8;
+    color: #2A4365;
+}
+
+/* Колір для "Очікує" (жовтий) */
+.status-waiting {
+    background-color: #FEFCBF;
+    color: #744210;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px;
+}
+
+.regulations-header h2 {
+    color: #1a202c;
+    margin-bottom: 24px;
+    font-size: 24px;
+}
+
+
+/* Змінюємо назву класу на ту, що в JSX */
+.admin-tasks-table-wrapper {
+    height: auto !important;
+    max-height: 500px; /* Таблиця почне скролитись після цієї висоти */
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: white;
+    border-radius: 12px;
+    box-shadow: -5px 8px 15px rgba(0, 0, 0, 0.26);
+    margin-top: 10px;
+    width: 100%;
+    display: block;
+}
+
+/* Змінюємо назву на .admin-tasks-table */
+.admin-tasks-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* Оновлюємо стилі заголовків для приліпання */
+.admin-tasks-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #728196; /* Прибрав прозорість, щоб текст не накладався при скролі */
+    padding: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    border-bottom: 2px solid #edf2f7;
+}
+
+/* Оновлюємо стилі комірок */
+.admin-tasks-table td {
+    padding: 16px;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 14px;
+    color: #2d3748;
+}
+
+.admin-tasks-table tr:hover {
+    background-color: #f9fbff;
+}
+
+
+
+.regulations-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    /* Тінь краще залишити тільки на wrapper, щоб не було подвійних контурів */
+}
+
+/* Фіксація заголовка при прокрутці (Sticky Header) */
+.regulations-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #728196a6;
+    padding: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    border-bottom: 2px solid #edf2f7;
+}
+
+.regulations-table td {
+    padding: 16px;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 14px;
+    color: #2d3748;
+}
+
+.regulations-table tr:hover {
+    background-color: #f9fbff;
+}
+
+.drug-name {
+    font-weight: 600;
+    color: #2b6cb0;
+}
+
+.date-cell {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.date-cell.bold {
+    font-weight: 700;
+}
+
+.days-cell {
+    font-weight: 600;
+}
+
+.days-cell.normal { color: #38a169; }
+.days-cell.urgent { color: #dd6b20; }
+.days-cell.overdue { color: #e53e3e; }
+
+.user-email {
+    color: #4a5568;
+    font-size: 13px;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-process {
+    background-color: #fefcbf;
+    color: #744210;
+}
+
+.status-done {
+    background-color: #c6f6d5;
+    color: #22543d;
+}
+
+/* Стилі для статусів */
+.status-tag {
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    min-width: 85px;
+}
+
+.status-tag.todo {
+    background-color: #f1f3f5;
+    color: #495057;
+}
+
+.status-tag.process {
+    background-color: #fff9db;
+    color: #f08c00;
+}
+
+.status-tag.done {
+    background-color: #ebfbee;
+    color: #2b8a3e;
+}
+
+/* Кольори для днів */
+.days-cell.urgent { color: #e03131; font-weight: bold; }
+.days-cell.normal { color: #2f9e44; }
+.days-cell.overdue { color: #c92a2a; text-decoration: underline; }
+
+.regulations-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,69 @@
+.drugs-container {
+    padding: 40px;
+    background-color: #dce2ed; /* Світло-сірий фон як на макеті */
+    min-height: 100vh;
+}
+
+.drugs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.drug-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: -5px 8px 15px rgba(0, 0, 0, 0.26);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+.drug-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.manufacturer {
+    color: #000000;
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
+.details-link {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: #000000; 
+    cursor: pointer;
+    font-weight: 180;
+}
+
+.add-drugs-btn {
+    width: 40px;
+    height: 40px;
+    position: absolute; 
+    right: 30px; 
+    top: 30px; 
+    border-radius: 8px;
+    border: none;
+    background-color: #ffffff;
+    color: #5d637a;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.23);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.add-drugs-btn:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.05);
+}

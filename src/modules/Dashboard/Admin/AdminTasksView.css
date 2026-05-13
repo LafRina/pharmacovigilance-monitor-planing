@@ -1,0 +1,155 @@
+/* Основний контейнер секції */
+.admin-tasks-container {
+    margin-top: 30px;
+    padding: 30px;
+}
+
+.admin-tasks-container h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+/* ОБГОРТКА ТАБЛИЦІ: саме тут працює обмеження висоти та скрол */
+/* Використовуйте в JSX: className="admin-tasks-table-wrapper" */
+.admin-tasks-table-wrapper, 
+.table-wrapper {
+    display: block;
+    height: auto !important; /* Фіксована висота */
+    max-height: 500px;
+    overflow-y: auto !important; /* Вертикальна прокрутка */
+    overflow-x: auto; /* Горизонтальна прокрутка для малих екранів */
+    border-radius: 15px;
+    box-shadow: -5px 8px 15px rgba(0, 0, 0, 0.26);
+    background: white;
+    position: relative;
+}
+
+/* САМА ТАБЛИЦЯ */
+.admin-tasks-table, 
+.regulations-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    table-layout: auto;
+}
+
+/* ФІКСОВАНИЙ ЗАГОЛОВОК (Sticky Header) */
+.admin-tasks-table thead th,
+.regulations-table thead th {
+    position: sticky;
+    top: 0; /* Прилипає до верху обгортки */
+    z-index: 10;
+    background-color: #9ea4b5; /* Основний колір заголовка */
+    color: #ffffff;
+    padding: 15px;
+    text-align: left;
+    font-weight: 500;
+    border-bottom: 2px solid #eee;
+}
+
+/* СТИЛІ КОМІРОК */
+.admin-tasks-table td,
+.regulations-table td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    color: #2c2f48;
+}
+
+.admin-tasks-table tr:hover,
+.regulations-table tr:hover {
+    background-color: #f9fbff;
+}
+
+/* Специфічні стилі для тексту */
+.drug-name {
+    font-weight: 600;
+    color: #2b6cb0;
+}
+
+.user-email {
+    color: #4a5568;
+    font-size: 13px;
+}
+
+/* СТАТУСИ ТА ПРІОРИТЕТИ */
+.status-tag, .prio-tag {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    min-width: 85px;
+}
+
+/* Кольори статусів */
+.status-tag.done { background: #e8f5e9; color: #2e7d32; }
+.status-tag.in-progress, .status-tag.process { background: #e3f2fd; color: #1565c0; }
+.status-tag.to-do, .status-tag.todo { background: #f5f5f5; color: #616161; }
+
+/* Кольори пріоритетів */
+.prio-tag.high { color: #d32f2f; font-weight: bold; }
+.prio-tag.medium { color: #f9a825; }
+.prio-tag.low { color: #2e7d32; }
+
+/* ФІЛЬТРИ (Хедер таблиці) */
+.admin-tasks-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.table-filters {
+    width: fit-content;    /* Основне рішення: блок стискається до розміру контенту */
+    margin-left: auto;     /* Якщо хочете залишити притиснутим до правого краю */
+    flex-shrink: 0;        /* Забороняє блоку стискатися менше за наповнення */
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background: #f1f3f5;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-group label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.filter-group select {
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    background: white;
+    font-size: 13px;
+    min-width: 150px;
+    outline: none;
+}
+
+.reset-link {
+    background: none;
+    border: none;
+    color: #e03131;
+    text-decoration: underline;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.no-results {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+}

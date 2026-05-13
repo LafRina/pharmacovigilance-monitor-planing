@@ -1,0 +1,82 @@
+.dashboard-wrapper {
+    padding: 20px;
+}
+
+h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Статистика */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.stat-value { 
+    font-size: 28px; 
+    font-weight: bold; 
+}
+.stat-icon {
+    position: absolute; 
+    right: 20px; 
+    top: 20px; 
+    font-size: 24px; 
+    opacity: 0.6; 
+}
+
+/* Таблиця */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+table { width: 100%; border-collapse: collapse; }
+th { background: #aeb4c2; color: white; padding: 12px; text-align: left; }
+td { padding: 12px; border-bottom: 1px solid #f0f0f0; }
+
+/* Бейджі типів (PSUR/PBRER) */
+.type-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: #cbd5e1;
+    font-size: 12px;
+}
+
+/* Кольори статусів */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+.status-badge.норма { background: #c2e0c6; color: #1e4620; }
+.status-badge.терміново { background: #f8d7da; color: #721c24; }
+.status-badge.у-роботі { background: #fcf4a3; color: #856404; }
+
+/* Завдання */
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.tasks-title h2{
+    color: #1a202c;
+    margin-bottom: 24px;
+    font-size: 24px;
+    margin-left: 15px;
+}

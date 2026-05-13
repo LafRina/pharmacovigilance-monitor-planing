@@ -1,0 +1,239 @@
+/* Головний контейнер календаря */
+.calendar-container {
+    /* border-radius: 24px; */
+    padding: 30px;
+    /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04); */
+    margin: 20px;
+    border: 1px solid #e0e4ec;
+}
+
+/* Прибираємо стандартні рамки таблиці */
+.fc {
+    --fc-border-color: #e0e4ec;
+    --fc-today-bg-color: #f8faff;
+    font-family: inherit;
+    border-radius: 15px;
+}
+
+/* Стилізація шапки днів (ПН, ВТ...) */
+.fc-col-header-cell {
+    background-color: #aeb3be !important; /* Сірий колір з макету */
+    padding: 12px 0 !important;
+}
+
+.fc-col-header-cell-cushion {
+    color: #ffffff !important;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+}
+
+/* Стилізація чисел місяця */
+.fc-daygrid-day-number {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1a1a1a;
+    padding: 10px !important;
+    text-decoration: none !important;
+}
+
+/* Події (плашки) */
+.fc-event {
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 2px 6px !important;
+    margin: 2px 4px !important;
+    cursor: pointer;
+}
+
+/* Кольори для різних типів звітів (як на макеті) */
+.event-drug-psur {
+    background-color: #c1d3f0 !important; /* Світло-синій */
+    color: #3e5b8a !important;
+}
+
+.event-drug-pbrer {
+    background-color: #dcd6f7 !important; /* Світло-бузковий */
+    color: #6a5da1 !important;
+}
+
+.event-task {
+    background-color: #282a62 !important; /* сірий для тасок */
+    color: #1a1a1a !important;
+}
+
+/* Стилізація тулбару (кнопки зверху) */
+.fc-toolbar-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #1a1a1a;
+    text-transform: lowercase; /* травень 2026 р. */
+}
+
+.fc-button-primary {
+    background-color: #ffffff !important;
+    border: 1px solid #e0e4ec !important;
+    color: #5d6679 !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+}
+
+.fc-button-primary:hover {
+    background-color: #f4f6f9 !important;
+}
+
+.fc-button-active {
+    background-color: #f4f6f9 !important;
+    color: #1a1a1a !important;
+    box-shadow: none !important;
+}
+
+/* Прибираємо точки перед івентами */
+.fc-daygrid-event-dot {
+    display: none !important;
+}
+
+/* Контейнер шапки днів тижня */
+.fc-theme-standard th {
+    background-color: #2c2f4893 !important; /* Твій колір з макету */
+    border: 1px solid #ffffff !important; /* Білі розділювачі між днями */
+}
+
+/* Текст всередині шапки (ПН, ВТ...) */
+.fc-col-header-cell-cushion {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 14px;
+    text-decoration: none !important;
+}
+
+/* Основні лінії сітки */
+.fc-theme-standard td, 
+.fc-theme-standard th {
+    border: 1px solid #00000053 !important; /* Світло-сірий колір ліній */
+}
+
+/* Прибираємо зовнішню рамку, щоб календар "зливався" з білою карткою */
+.fc-scrollgrid {
+    border-radius: 0 0 20px 20px !important;
+    border: none !important;
+}
+
+/* Стиль для комірок, які не належать поточному місяцю (сірі числа) */
+.fc-day-other {
+    background-color: #0000001f !important;
+}
+
+.fc-day-other .fc-daygrid-day-number {
+    color: #000000 !important;
+}
+
+
+/* 1. Головний контейнер для всієї області календаря */
+.fc-view-harness {
+    border-radius: 15px !important;
+    overflow: hidden !important; /* Це обріже гострі кути внутрішньої таблиці */
+    background: #ffffff;
+    box-shadow: -5px 8px 15px rgba(0, 0, 0, 0.26);
+    
+}
+
+.fc-scrollgrid-sync-table{
+    border-radius: 15px !important;
+    
+}
+/* 2. Прибираємо зовнішню рамку таблиці, щоб вона не дублювалася з контейнером */
+.fc-scrollgrid {
+    border: none !important;
+    overflow: hidden !important; /* Це обріже гострі кути внутрішньої таблиці */
+    border-radius: 15px !important;
+}
+
+/* 3. Окремо заокруглюємо верхню частину (шапку з ПН, ВТ...) */
+.fc-theme-standard .fc-scrollgrid {
+    border-radius: 15px 15px 0 0 !important;
+}
+
+/* 4. Виправляємо рамки всередині, щоб вони не конфліктували з радіусом */
+.fc-scrollgrid-section-header > td {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 15px !important;
+}
+
+/* Встановлюємо мінімальну висоту для контентної області дня */
+.fc .fc-daygrid-day-frame {
+    min-height: 130px !important; /* Налаштуй це число під свій макет */
+    /* min-width: 100px !important; Налаштуй це число під свій макет */
+}
+
+/* Додаємо внутрішні відступи для чисел, щоб вони не притискалися до країв */
+.fc .fc-daygrid-day-top {
+    padding: 5px !important;
+}
+
+.notifications-overlay {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-left: 5px solid #3182ce;
+    animation: slideIn 0.5s ease-out;
+    min-width: 300px;
+}
+
+.notification-item.warning { border-left-color: #ecc94b; } /* Жовтий для 7 днів */
+.notification-item.urgent { border-left-color: #e53e3e; }  /* Червоний для 1 дня */
+
+.notification-text {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #2d3748;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.notification-item {
+    padding-right: 35px; /* Місце для кнопки */
+}
+
+.close-notification-btn {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0 5px;
+}
+
+.close-notification-btn:hover {
+    color: #333;
+}
+
+.notification-item.urgent .close-notification-btn {
+    color: #fff; /* Білий хрестик на червоному фоні для термінових */
+    opacity: 0.8;
+}

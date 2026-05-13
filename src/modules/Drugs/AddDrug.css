@@ -1,0 +1,139 @@
+.add-drug-container {
+    padding: 40px 60px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.add-drug-card {
+    background: white;
+    padding: 50px;
+    border-radius: 25px;
+    max-width: 800px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+}
+
+.form-input-wrapper {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input-line {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #d1d1d1;
+    padding: 12px 0;
+    margin-bottom: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-input-line:focus {
+    border-color: #8c92ac;
+}
+
+/* Щоб дата не була занадто довгою */
+.form-row .form-input-wrapper {
+    flex: 2;
+}
+
+.form-row .input-group {
+    flex: 1;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #7d7d7d;
+    font-size: 14px;
+}
+
+
+/* Текстові області мають бути на весь рядок */
+.form-textarea-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Кнопка збереження */
+.submit-drug-btn {
+    width: 100%;
+    padding: 18px;
+    background-color: #dce2ed;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-drug-btn:hover {
+    background: #cfd6e4;
+}
+
+/* Ряд з датою та селектами (тепер 3 елементи) */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.form-row > * {
+    flex: 1;
+}
+
+/* Вертикальний стек для textarea */
+.textarea-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Відступ між блоками */
+    width: 100%;
+    margin-top: 10px;
+}
+
+.textarea-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-textarea {
+    width: 100%;
+    min-height: 100px;
+    background-color: #e5e7eb; /* Світло-сірий фон як у макеті */
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 15px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    margin-top: 8px;
+}
+
+/* Стиль для селектів */
+.form-select {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #d1d1d1;
+    padding: 10px 0;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+}

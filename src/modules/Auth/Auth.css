@@ -1,0 +1,86 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .auth-card {
+    background-color: #848ba0; /* Основний сірий колір картки */
+    width: 500px;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: white;
+  }
+  
+  .auth-card h2 {
+    font-size: 28px;
+    margin-bottom: 40px;
+    font-weight: 500;
+  }
+  
+  .input-group {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  
+  .auth-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    padding: 10px 5px;
+    font-size: 16px;
+    outline: none;
+    margin: 0 0 20px 0;
+  }
+  
+  .auth-input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .auth-input.invalid {
+    border-bottom: 1px solid #f87171 !important; /* Яскраво-червоний */
+    color: #f87171;
+  }
+
+  .auth-input.invalid::placeholder {
+    color: #f87171;
+  }
+  
+  .btn-enter {
+    background-color: #434753; /* Темна кнопка */
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 160px;
+    text-transform: uppercase;
+    display: block;    /* Робимо кнопку блочним елементом */
+    margin: 20px auto;
+  }
+
+  .btn-register {
+    background-color: #434753; /* Темна кнопка */
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 245px;
+    text-transform: uppercase;
+    display: block;    /* Робимо кнопку блочним елементом */
+    margin: 20px auto;
+  }
+  
+  .p {
+    margin: 20;
+    font-size: 16px;
+  }
+  

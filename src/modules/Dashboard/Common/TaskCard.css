@@ -1,0 +1,272 @@
+.tasks-container {
+    padding: 20px;
+}
+
+.tasks-title h2{
+    color: #1a202c;
+    margin-bottom: 24px;
+    font-size: 24px;
+    margin-left: 15px;
+}
+
+.tasks-grid {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 20px;
+    padding-inline: 15px;
+}
+
+.task-card {
+    background: #ffffff;
+    border-radius: 20px; 
+    padding: 30px;
+    box-shadow: -5px 8px 15px rgba(0, 0, 0, 0.26);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+    width: 280px;
+    height: 380px;
+}
+
+.task-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    color: #000;
+}
+
+.task-status-badge {
+    background-color: #f3f0be; /* Жовтуватий колір зі скриншота */
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 8px;
+    width: fit-content;
+    font-size: 16px;
+}
+
+.task-deadline {
+    font-size: 18px;
+    color: #000;
+    margin: 10px 0;
+}
+
+.task-description-block h4 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #000;
+    font-weight: 500;
+}
+
+.task-description-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Обрізаємо текст як на фото */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.task-link {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.task-link:hover {
+    color: #000;
+}
+
+.task-badges-row {
+    display: flex;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+/* Стиль для жовтих "плашок" */
+.status-select-badge, .priority-display-badge {
+    background-color: #f3f0be; /* Твій світло-жовтий колір */
+    border: none;
+    border-radius: 10px;
+    padding: 8px 15px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    appearance: none; /* Прибирає стандартну стрілку браузера */
+    cursor: pointer;
+}
+
+.task-deadline {
+    font-size: 18px;
+    margin: 15px 0;
+    color: #1a1a1a;
+}
+
+.description-label {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.task-description-text {
+    color: #1a1a1a;
+    font-size: 16px;
+    line-height: 1.4;
+    /* Обрізання тексту як на макеті */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 40px;
+}
+
+.task-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.task-link-btn {
+    font-size: 14px;
+    cursor: pointer;
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: #000000; 
+    font-weight: 180;
+}
+
+.task-link-btn:hover {
+    color: #1a1a1a;
+}
+
+/* Базовий стиль селекта (залишаємо твій радіус та відступи) */
+.status-select-badge {
+    border: none;
+    border-radius: 10px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease; /* Плавний перехід кольору */
+}
+
+/* Синя для To Do */
+.status-to-do {
+    background-color: #e3f4fd; /* Світло-блакитний */
+    color: #000000;            /* Темно-синій текст */
+}
+
+/* Жовта для In Progress */
+.status-in-progress {
+    background-color: #fff8e1; /* Світло-жовтий */
+    color: #f9a825;            /* Золотистий текст */
+}
+
+/* Зелена для Done */
+.status-done {
+    background-color: #e8f5e9; /* Світло-зелений */
+    color: #2e7d32;            /* Темно-зелений текст */
+}
+
+/* Стандартна картка залишається білою */
+.task-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    /* ваші існуючі стилі */
+}
+
+/* Картка PSUR стає блакитною */
+.task-card.psur-card {
+    background-color: rgba(198, 194, 226, 0.94); /* Світло-блакитний колір */
+    box-shadow: -5px 8px 15px rgba(0, 0, 0, 0.26);
+}
+
+/* Можна також змінити колір заголовка всередині блакитної картки */
+.psur-card .task-name {
+    color: #000000; /* Темно-синій колір тексту */
+}
+
+/* Коригування кольору дати для кращого читання на блакитному фоні */
+.psur-card .task-deadline {
+    color: #1e88e5;
+    font-weight: 600;
+}
+
+/* Основний макет */
+.tasks-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start; /* Щоб фільтри не розтягувалися на всю висоту */
+    margin-top: 20px;
+}
+
+/* Бокова панель */
+.tasks-sidebar {
+    width: fit-content;    /* Основне рішення: блок стискається до розміру контенту */
+    margin-left: auto;     /* Якщо хочете залишити притиснутим до правого краю */
+    flex-shrink: 0;        /* Забороняє блоку стискатися менше за наповнення */
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.tasks-sidebar .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tasks-sidebar label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tasks-sidebar select, 
+.tasks-sidebar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+}
+
+/* Кнопка скидання */
+.reset-filter-btn {
+    margin-top: 10px;
+    background: none;
+    border: 1px dashed #dc3545;
+    color: #dc3545;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.reset-filter-btn:hover {
+    background: #fff5f5;
+}
+
+/* Сітка карток */
+.tasks-grid {
+    flex-grow: 1; /* Займає весь вільний простір справа */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}

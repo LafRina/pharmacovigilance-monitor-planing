@@ -1,0 +1,89 @@
+.reports-container {
+    padding: 30px;
+}
+
+.reports-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.add-report-btn-top {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Сітка звітів */
+.reports-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* Стиль картки як на скриншоті 18.13.16 */
+.report-card-styled {
+    background: white;
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: -5px 8px 15px rgba(0, 0, 0, 0.26);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    transition: transform 0.2s;
+}
+
+.report-card-styled:hover {
+    transform: translateY(-5px);
+}
+
+.report-card-styled h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.report-card-date {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.report-card-tag {
+    background: #C6D2E5;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a202c;
+}
+
+.report-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.view-report-btn {
+    background: none;
+    border: none;
+    color: #4a5568;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.view-report-btn:hover {
+    text-decoration: underline;
+}
+
+/* Використовуємо існуючі стилі лейауту та сайдбару з TaskCard.css */

@@ -1,0 +1,73 @@
+.users-page-container {
+    padding: 40px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #1a1a1a;
+}
+
+/* Сітка для карток */
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Основна картка: колір та тіні як у препаратах */
+.user-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex; /* Робимо контент у рядок */
+    flex-direction: column;
+    align-items: center; /* Центруємо аватар по вертикалі */
+    gap: 20px; /* Відступ між аватаром та текстом */
+    box-shadow: -5px 8px 15px rgba(0, 0, 0, 0.26);
+}
+
+/* Стиль аватара (кружечок з літерою) */
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    background-color: #8c92ac; /* Твій фірмовий колір із сайдбару */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    flex-shrink: 0; /* Щоб аватар не стискався */
+}
+
+/* Контейнер для тексту */
+.user-info-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.user-email-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    color: #000000;
+}
+
+.user-role-badge {
+    font-size: 15px;
+    color: #4a4a4a;
+    margin: 0;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.user-full-email {
+    font-size: 13px;
+    color: #8e8e8e;
+    margin: 0;
+}
