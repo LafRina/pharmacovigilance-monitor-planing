@@ -1,6 +1,13 @@
 // Тут опиcана логіка "70/90 днів" та перевірку на вихідні.
 
-import { addDays, isWeekend, subDays, addYears, addMonths, parseISO, format } from 'date-fns';
+import { addDays, isWeekend, subDays, addYears, addMonths, parseISO, format, differenceInDays } from 'date-fns';
+
+export const getDaysLeft = (targetDate) => {
+    const days = differenceInDays(parseISO(targetDate), new Date());
+    if (days < 0) return { text: `${Math.abs(days)} дн. тому`, statusClass: 'overdue' };
+    if (days <= 14) return { text: `${days} дн.`, statusClass: 'urgent' };
+    return { text: `${days} дн.`, statusClass: 'normal' };
+};
 
 // Функція для перенесення дати з вихідних на п'ятницю
 export const adjustForWeekends = (date) => {
