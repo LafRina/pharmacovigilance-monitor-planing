@@ -1,5 +1,5 @@
-import './DrugsList.css';
 import { useNavigate } from 'react-router-dom';
+import './DrugsList.css';
 
 export default function DrugCard({drug}){
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function DrugCard({drug}){
                 <p className='manufacturer'>
                     <strong>Виробник:</strong> {drug.manufacturer || 'Не вказаний'}
                 </p>
-                {/* Додаємо форму випуску, якщо вона є у вашій таблиці */}
+                {/* Додаємо форму випуску, якщо вона є у таблиці */}
                 {/* {drug.form_of_release && (
                     <p className='form-release'>
                         <small>{drug.form_of_release}</small>

@@ -3,19 +3,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './modules/Auth/Login';
 import Register from './modules/Auth/Register';
 import CalendarView from './modules/Calendar/CalendarView';
-import AdminCalendar from './modules/Calendar/AdminCalendar';
 import UserDashboard from './modules/Dashboard/User/UserDashboard';
 import AdminDashboard from './modules/Dashboard/Admin/AdminDashboard';
-import DrugsList from './modules/Drugs/DrugsList';
+import DrugsList from './modules/Drugs/Common/DrugsList';
 import Reports from './modules/Reports/Reports';
 import RootLayout from './components/RootLayout';
 import PrivateRoutes from './components/PrivateRoutes';
 import AllUsersPage from './modules/AllUsers/AllUsersPage';
 import { useEffect, useState } from 'react';
 import { supabase } from './api/supabaseClient';
-import AddDrug from './modules/Drugs/AddDrug';
-import DrugDetails from './modules/Drugs/DrugDetails';
-import EditDrug from './modules/Drugs/EditDrug';
+import AddDrug from './modules/Drugs/Admin/AddDrug';
+import DrugDetails from './modules/Drugs/Common/DrugDetails';
+import EditDrug from './modules/Drugs/Admin/EditDrug';
 import AdminCreateTask from './modules/Dashboard/Admin/AdminCreateTask';
 import GenerateReport from './modules/Reports/GenerateReport';
 import ReportDetails from './modules/Reports/ReportsDetails';
@@ -91,7 +90,6 @@ function App() {
             {/* 4. Маршрути ТІЛЬКИ для Адміна */}
             <Route element={<PrivateRoutes allowedRoles={['admin']} userRole={role} isRoleLoading={isRoleLoading} />}>
               <Route path="/admindashboard" element={<AdminDashboard user={user} userRole={role}/>} />
-              <Route path="/admincalendar" element={<AdminCalendar />} />
               <Route path="/allusers" element={<AllUsersPage />} />
               <Route path="/adddrug" element={<AddDrug user={user}/>} />
               <Route path="/edit-drug/:id" element={<EditDrug user={user} />} />

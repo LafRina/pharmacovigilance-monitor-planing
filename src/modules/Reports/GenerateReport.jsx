@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../api/supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import '../Drugs/AddDrug.css'; // Використовуємо існуючі стилі для ідентичного вигляду
+import '../Drugs/Admin/AddDrug.css'; // Використовуємо існуючі стилі для ідентичного вигляду
 
 export default function GenerateReport() {
     const navigate = useNavigate();
