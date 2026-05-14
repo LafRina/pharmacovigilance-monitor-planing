@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRegulations } from '../../../hooks/useRegulations'; // Імпорт хука
-import { getDaysLeft } from '../../../utils/dateLogic'; // Винеси цю функцію в утиліти
+import { getDaysLeft } from '../../../utils/dateLogic'; 
 import './ActiveRegulations.css';
 import '../Admin/AdminTasksView.css';
 

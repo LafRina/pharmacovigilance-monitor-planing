@@ -1,21 +1,27 @@
 import { useEffect, useState } from 'react';
-import { differenceInDays, parseISO } from 'date-fns';
 import './CalendarView.css';
+import { differenceInDays, parseISO, startOfDay } from 'date-fns';
+
 
 export default function Notifications({ events, onNotificationClick }) {
     const [alerts, setAlerts] = useState([]);
 
     useEffect(() => {
-        if (events.length > 0) {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
+        if (events && events.length > 0) {
+            const today = startOfDay(new Date());
 
             const upcomingAlerts = events.reduce((acc, event) => {
-                const eventDate = parseISO(event.start);
+                // Фільтруємо виконані
+                const status = event.extendedProps?.status?.toLowerCase();
+                if (status === 'completed' || status === 'done') return acc;
+
+                // Рахуємо різницю в днях напряму
+                const eventDate = startOfDay(parseISO(event.start));
                 const daysDiff = differenceInDays(eventDate, today);
 
-                // Нагадування за 7 днів або 1 день
-                if (daysDiff === 7 || daysDiff === 1) {
+                // Умова: сьогодні (0), завтра (1) або через тиждень (7)
+                // Додаємо 0, щоб ти бачила сповіщення про "Додати новий препарат" прямо зараз
+                if (daysDiff === 0 || daysDiff === 1 || daysDiff === 7) {
                     acc.push({
                         id: event.id || Math.random(),
                         title: event.title,
@@ -30,9 +36,8 @@ export default function Notifications({ events, onNotificationClick }) {
         }
     }, [events]);
 
-    // Функція для закриття одного сповіщення
     const handleClose = (e, id) => {
-        e.stopPropagation(); // Щоб клік по "х" не викликав перехід за посиланням
+        e.stopPropagation();
         setAlerts(prev => prev.filter(alert => alert.id !== id));
     };
 
@@ -43,25 +48,20 @@ export default function Notifications({ events, onNotificationClick }) {
             {alerts.map((alert) => (
                 <div 
                     key={alert.id} 
-                    className={`notification-item ${alert.daysLeft === 1 ? 'urgent' : 'warning'}`}
+                    className={`notification-item ${alert.daysLeft <= 1 ? 'urgent' : 'warning'}`}
                     onClick={() => onNotificationClick(alert.rawEvent)}
-                    style={{ cursor: 'pointer', position: 'relative' }}
                 >
                     <span className="bell-icon">🔔</span>
                     <div className="notification-text">
-                        <strong>{alert.daysLeft === 1 ? 'ТЕРМІНОВО: ' : 'Нагадування: '}</strong>
+                        <strong>
+                            {alert.daysLeft === 0 && 'СЬОГОДНІ: '}
+                            {alert.daysLeft === 1 && 'ТЕРМІНОВО (завтра): '}
+                            {alert.daysLeft === 7 && 'НАГАДУВАННЯ (через тиждень): '}
+                        </strong>
                         {alert.title}
                         <div className="click-hint">Натисніть, щоб переглянути</div>
                     </div>
-
-                    {/* Кнопка закриття */}
-                    <button 
-                        className="close-notification-btn"
-                        onClick={(e) => handleClose(e, alert.id)}
-                        title="Закрити"
-                    >
-                        &times;
-                    </button>
+                    <button className="close-notification-btn" onClick={(e) => handleClose(e, alert.id)}>&times;</button>
                 </div>
             ))}
         </div>

@@ -3,7 +3,7 @@ import { supabase } from '../api/supabaseClient';
 export const findBestSubstanceMatch = async (substanceName) => {
     try {
         // Спроба 1: Шукаємо точне співпадіння (моно-препарат)
-        // Використовуємо .maybeSingle() замість .single()
+        // Використовуємо .maybeSingle()
         // .maybeSingle() повертає null, якщо нічого не знайдено, замість помилки
         const { data: exact, error } = await supabase
             .from('active_substances')

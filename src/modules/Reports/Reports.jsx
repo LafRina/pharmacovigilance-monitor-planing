@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useReports } from '../../hooks/useReports'; // Імпортуємо ваш хук
+import { useReports } from '../../hooks/useReports'; 
 import './Reports.css'; 
 
 export default function Reports() {
     const navigate = useNavigate();
-    // 1. Використовуємо хук замість локального стейту та useEffect
+    // Використовуємо хук замість локального стейту та useEffect
     const { reports, loading } = useReports(); 
 
     const [userFilter, setUserFilter] = useState('all');
@@ -25,13 +25,36 @@ export default function Reports() {
         <div className="reports-container">
             <header className="reports-header-row">
                 <h2>Звіти</h2>
-                <button className="add-report-btn-top" onClick={() => navigate('/reports/new')}>+</button>
+                <button className="add-report-btn-top" onClick={() => navigate('/generatereports')}>+</button>
             </header>
 
-            <div className="tasks-layout">
-                <aside className="tasks-sidebar">
-                    {/* Фільтри залишаються без змін */}
+            <aside className="tasks-sidebar">
+                    <div className="filter-group">
+                        <label>Користувач у звіті:</label>
+                        <select value={userFilter} onChange={(e) => setUserFilter(e.target.value)}>
+                            <option value="all">Усі користувачі</option>
+                            {uniqueUsers.map(email => (
+                                <option key={email} value={email}>{email}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="filter-group">
+                        <label>Дата створення:</label>
+                        <input 
+                            type="date" 
+                            value={dateFilter} 
+                            onChange={(e) => setDateFilter(e.target.value)}
+                        />
+                    </div>
+
+                    {(userFilter !== 'all' || dateFilter !== '') && (
+                        <button className="reset-filter-btn" onClick={() => { setUserFilter('all'); setDateFilter(''); }}>
+                            Скинути фільтри
+                        </button>
+                    )}
                 </aside>
+            <div className="tasks-layout">
 
                 <main className="reports-grid">
                     {filteredReports.map(report => (
@@ -97,32 +120,32 @@ export default function Reports() {
 //                     <button className="add-report-btn-top" onClick={() => navigate('/reports/new')}>+</button>
 //                 </header>
 
-//                 <aside className="tasks-sidebar">
-//                     <div className="filter-group">
-//                         <label>Користувач у звіті:</label>
-//                         <select value={userFilter} onChange={(e) => setUserFilter(e.target.value)}>
-//                             <option value="all">Усі користувачі</option>
-//                             {uniqueUsers.map(email => (
-//                                 <option key={email} value={email}>{email}</option>
-//                             ))}
-//                         </select>
-//                     </div>
+                // <aside className="tasks-sidebar">
+                //     <div className="filter-group">
+                //         <label>Користувач у звіті:</label>
+                //         <select value={userFilter} onChange={(e) => setUserFilter(e.target.value)}>
+                //             <option value="all">Усі користувачі</option>
+                //             {uniqueUsers.map(email => (
+                //                 <option key={email} value={email}>{email}</option>
+                //             ))}
+                //         </select>
+                //     </div>
 
-//                     <div className="filter-group">
-//                         <label>Дата створення:</label>
-//                         <input 
-//                             type="date" 
-//                             value={dateFilter} 
-//                             onChange={(e) => setDateFilter(e.target.value)}
-//                         />
-//                     </div>
+                //     <div className="filter-group">
+                //         <label>Дата створення:</label>
+                //         <input 
+                //             type="date" 
+                //             value={dateFilter} 
+                //             onChange={(e) => setDateFilter(e.target.value)}
+                //         />
+                //     </div>
 
-//                     {(userFilter !== 'all' || dateFilter !== '') && (
-//                         <button className="reset-filter-btn" onClick={() => { setUserFilter('all'); setDateFilter(''); }}>
-//                             Скинути фільтри
-//                         </button>
-//                     )}
-//                 </aside>
+                //     {(userFilter !== 'all' || dateFilter !== '') && (
+                //         <button className="reset-filter-btn" onClick={() => { setUserFilter('all'); setDateFilter(''); }}>
+                //             Скинути фільтри
+                //         </button>
+                //     )}
+                // </aside>
 
 //             </div>
 

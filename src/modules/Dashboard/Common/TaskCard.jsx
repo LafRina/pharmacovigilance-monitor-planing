@@ -4,14 +4,14 @@ import './TaskCard.css';
 import { useUserTasks } from '../../../hooks/useUserTasks'; // Імпорт хука
 
 export default function TaskCard({ user }) {
-    // 1. Отримуємо дані та функції з хука
+    // Отримуємо дані та функції з хука
     const { tasks, loading, updateTaskStatus } = useUserTasks(user?.id);
 
-    // 2. Локальний стан для фільтрів залишається в компоненті
+    // Локальний стан для фільтрів
     const [dateFilter, setDateFilter] = useState('');
     const [typeFilter, setTypeFilter] = useState('all');
 
-    // 3. Обробник зміни статусу тепер використовує функцію з хука
+    // Обробник зміни статусу тепер використовує функцію з хука
     const handleStatusChange = async (taskId, newStatus, drugId) => {
         try {
             await updateTaskStatus(taskId, newStatus, drugId);
@@ -20,7 +20,7 @@ export default function TaskCard({ user }) {
         }
     };
 
-    // 4. Логіка фільтрації
+    // Логіка фільтрації
     const filteredTasks = tasks.filter(task => {
         const isPsur = task.title?.includes('PSUR');
         
@@ -34,7 +34,7 @@ export default function TaskCard({ user }) {
         return matchesType && matchesDate;
     });
 
-    // 5. Обробка станів завантаження
+    // Обробка станів завантаження
     if (loading && !user?.id) return <div className="loader">Очікування авторизації...</div>;
     if (loading) return <div className="loader">Завантаження завдань з бази...</div>;
 

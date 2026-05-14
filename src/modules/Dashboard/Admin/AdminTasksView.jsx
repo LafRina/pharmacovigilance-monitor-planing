@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { supabase } from '../../../api/supabaseClient';
-import { useAdminTasks } from '../../../hooks/useAdminTasks'; // Імпортуємо хук
+import { useAdminTasks } from '../../../hooks/useAdminTasks';
 import './AdminTasksView.css';
 
 export default function AdminTasksView() {
-    // 1. Використовуємо хук замість локального стейту та useEffect
+    // Використовуємо хук замість локального стейту та useEffect
     const { tasks, loading } = useAdminTasks();
     
     const [statusFilter, setStatusFilter] = useState('all');
     const [userFilter, setUserFilter] = useState('all');
 
-    // 2. Логіка фільтрації залишається тут, бо це логіка відображення (UI)
+    // Логіка фільтрації залишається тут, бо це логіка відображення (UI)
     if (loading) return <div>Завантаження списку завдань...</div>;
 
     const uniqueUsers = [...new Set(tasks.map(t => t.profiles?.email))].filter(Boolean);

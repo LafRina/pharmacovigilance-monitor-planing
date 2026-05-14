@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { supabase } from '../../../api/supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../../../hooks/useUsers'; // Імпорт хука
-import { logAction } from '../../../utils/audit';
-import FormInput from '../../../components/common/FormInput';
+import AddDrugInput from '../../Drugs/Admin/AddDrugInput';
 import FormSelect from '../../../components/common/FormSelect';
 import './AdminCreateTask.css';
 
@@ -49,7 +48,7 @@ export default function AdminCreateTask({ adminUser }) {
                 <h2 className="form-title" style={{marginBottom: '30px'}}>Створити нове завдання</h2>
                 
                 <form onSubmit={handleSubmit} className="drug-form">
-                    <FormInput 
+                    <AddDrugInput 
                         name="title" 
                         placeholder="Назва завдання" 
                         value={formData.title}
@@ -67,7 +66,7 @@ export default function AdminCreateTask({ adminUser }) {
                     />
 
                     <div className="form-row">
-                        <FormInput 
+                        <AddDrugInput 
                             label="Виконати до"
                             type="date" 
                             name="due_date" 

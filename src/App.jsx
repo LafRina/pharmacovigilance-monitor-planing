@@ -72,22 +72,22 @@ function App() {
         <Route path="/login" element={<Login userRole={role} />} />
         <Route path="/register" element={<Register />} />
 
-        {/* 1. Загальна обгортка для всіх, хто увійшов (і юзери, і адміни) */}
+        {/* Загальна обгортка для всіх, хто увійшов (і юзери, і адміни) */}
         <Route element={<PrivateRoutes allowedRoles={['user', 'admin']} userRole={role} isRoleLoading={isRoleLoading} />}>
           <Route element={<RootLayout user={user} userRole={role} isRoleLoading={isRoleLoading} />}>
             
-            {/* 2. СПІЛЬНІ СТОРІНКИ (пишемо їх ТУТ один раз) */}
+            {/* СПІЛЬНІ СТОРІНКИ */}
             <Route path="/drugslist" element={<DrugsList userRole={role}/>} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/drugs/:id" element={<DrugDetails user={user} userRole={role}/>} />
 
-            {/* 3. Маршрути ТІЛЬКИ для Юзера */}
+            {/* Маршрути ТІЛЬКИ для Юзера */}
             <Route element={<PrivateRoutes allowedRoles={['user']} userRole={role} isRoleLoading={isRoleLoading} />}>
               <Route path="/userdashboard" element={<UserDashboard user={user}/>} />
               <Route path="/usercalendar" element={<CalendarView />} />
             </Route>
 
-            {/* 4. Маршрути ТІЛЬКИ для Адміна */}
+            {/* Маршрути ТІЛЬКИ для Адміна */}
             <Route element={<PrivateRoutes allowedRoles={['admin']} userRole={role} isRoleLoading={isRoleLoading} />}>
               <Route path="/admindashboard" element={<AdminDashboard user={user} userRole={role}/>} />
               <Route path="/allusers" element={<AllUsersPage />} />

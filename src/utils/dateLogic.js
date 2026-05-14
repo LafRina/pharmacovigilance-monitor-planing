@@ -1,4 +1,4 @@
-// Тут опиcана логіка "70/90 днів" та перевірку на вихідні.
+// логіка "70/90 днів" та перевірку на вихідні
 
 import { addDays, isWeekend, subDays, addYears, addMonths, parseISO, format, differenceInDays } from 'date-fns';
 
@@ -24,7 +24,6 @@ export const calculateNextDates = (lastDlp, frequency) => {
     const count = parseInt(frequency);
 
     // Додаємо період, поки дата не стане МАЙБУТНЬОЮ відносно сьогодні
-    // Це виправить помилку з 2027 роком
     while (dlpDate <= now) {
         if (frequency.includes('місяц')) {
             dlpDate = addMonths(dlpDate, count);
@@ -33,7 +32,7 @@ export const calculateNextDates = (lastDlp, frequency) => {
         }
     }
 
-    // 4. Визначаємо термін подання (70 або 90 днів)
+    // Визначаємо термін подання (70 або 90 днів)
     // Логіка: якщо період <= 1 року (6 міс або 1 рік) -> 70 днів, інакше -> 90 днів
     const isShort = frequency.includes('6 місяц') || frequency.includes('1 рік');
     const daysToAdd = isShort ? 70 : 90;

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../../hooks/useUsers';
 import { useReports } from '../../hooks/useReports';
-import '../Drugs/Admin/AddDrug.css'; // Використовуємо існуючі стилі для ідентичного вигляду
+import { supabase } from '../../api/supabaseClient';
+import '../Drugs/Admin/AddDrug.css';
 
 
 

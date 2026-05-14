@@ -1,4 +1,4 @@
-import TaskCard from '../Common/TaskCard.jsx'; // Переконайся, що шлях правильний
+import TaskCard from '../Common/TaskCard.jsx'; 
 import './UserDashboard.css';
 import ActiveRegulations from '../Common/ActiveRegulations.jsx';
 import GeneralInfoBlock from '../Common/GeneralInfoBlock.jsx';
