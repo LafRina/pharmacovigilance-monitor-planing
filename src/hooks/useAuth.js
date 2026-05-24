@@ -3,12 +3,12 @@ import { supabase } from '../api/supabaseClient';
 export function useAuth() {
     // Логіка реєстрації
     const register = async (email, password) => {
-        // 1. Створення акаунта в Auth
+        // Створення акаунта в Auth
         const { data, error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
 
         if (data.user) {
-            // 2. Створення профілю в базі
+            // Створення профілю в базі
             const { error: profileError } = await supabase
                 .from('profiles')
                 .insert([{ id: data.user.id, email, role: 'user' }]);

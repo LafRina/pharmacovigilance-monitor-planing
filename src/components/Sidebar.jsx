@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../api/supabaseClient.js';
 import SidebarSection from './SidebarSection.jsx';
 
-// Іконки (переконайся, що шляхи правильні)
+// Іконки 
 import calendarIcon from '../icons/calendar-icon.png';
 import compassIcon from '../icons/compass-icon.png';
 import folderIcon from '../icons/folder-icon.png';

@@ -4,81 +4,113 @@ import { findBestSubstanceMatch } from '../utils/substancePicker';
 import { logAction } from '../utils/audit';
 
 export function useDrugActions() {
-    // Логіка створення препарату + автоматичний розрахунок PSUR
+    
     const createDrugWithSchedule = async (formData, userId, userEmail) => {
-        // 1. Створення препарату
-        const { data: newDrug, error: drugError } = await supabase
-            .from('drugs')
-            .insert([{ ...formData, created_by: userId }])
-            .select().single();
+        console.log("🚀 Початок процесу створення препарату...");
 
-        if (drugError) throw drugError;
+        try {
+            // 1. Деструктуризація: відокремлюємо assigned_to, бо його немає в таблиці drugs
+            const { assigned_to, ...drugTableData } = formData;
 
-        // 2. Пошук речовини та розрахунок дат
-        const substance = await findBestSubstanceMatch(formData.active_substance);
-        if (substance) {
-            const { nextDlp, nextDeadline } = calculateNextDates(substance.dlp, substance.frequency);
+            // 2. Форматування дат (конвертуємо з DD.MM.YYYY у YYYY-MM-DD для PostgreSQL)
+            const formatDate = (dateStr) => {
+                if (!dateStr || !dateStr.includes('.')) return dateStr;
+                return dateStr.split('.').reverse().join('-');
+            };
 
-            // 3. Створення регламенту
-            await supabase.from('active_regulations').insert([{
-                drug_id: newDrug.id,
-                assigned_to: formData.assigned_to,
-                type_doc: 'PSUR',
-                dlp_date: nextDlp,
-                submission_deadline: nextDeadline,
-                status: 'В роботі',
-                periodicity: substance.frequency,
+            const payload = {
+                trade_name: drugTableData.trade_name,
+                active_substance: drugTableData.active_substance,
+                form_of_release: drugTableData.form_of_release,
+                registration_number: drugTableData.registration_number,
+                registration_date: formatDate(drugTableData.registration_date),
+                expiration_date: formatDate(drugTableData.expiration_date),
+                manufacturer: drugTableData.manufacturer,
+                applicant: drugTableData.applicant,
                 created_by: userId
-            }]);
+            };
 
-            // 4. Створення тасок
-            await supabase.from('tasks').insert([
-                { assigned_to: formData.assigned_to, drug_id: newDrug.id, title: `PSUR ${formData.trade_name}: DLP`, due_date: nextDlp, status: 'To Do', created_by: userId },
-                { assigned_to: formData.assigned_to, drug_id: newDrug.id, title: `PSUR ${formData.trade_name}: Deadline`, due_date: nextDeadline, status: 'To Do', created_by: userId }
-            ]);
+            console.log("📡 Відправка даних у таблицю 'drugs':", payload);
+
+            // 3. Вставка в таблицю drugs
+            const { data: newDrug, error: drugError } = await supabase
+                .from('drugs')
+                .insert([payload])
+                .select()
+                .single();
+
+            if (drugError) throw drugError;
+            console.log("✅ Препарат створено успішно:", newDrug);
+
+            // 4. Пошук відповідності діючої речовини для розрахунку регламенту
+            const substance = await findBestSubstanceMatch(drugTableData.active_substance);
+            
+            if (substance) {
+                console.log("🔍 Знайдено речовину для регламенту:", substance);
+                const { nextDlp, nextDeadline } = calculateNextDates(substance.dlp, substance.frequency);
+
+                // 5. Створення запису в active_regulations
+                const { error: regError } = await supabase.from('active_regulations').insert([{
+                    drug_id: newDrug.id,
+                    assigned_to: assigned_to,
+                    type_doc: 'PSUR',
+                    dlp_date: nextDlp,
+                    submission_deadline: nextDeadline,
+                    status: 'В роботі',
+                    periodicity: substance.frequency,
+                    created_by: userId
+                }]);
+
+                if (regError) throw regError;
+
+                // 6. Створення тасок для календаря
+                const { error: taskError } = await supabase.from('tasks').insert([
+                    { 
+                        assigned_to, 
+                        drug_id: newDrug.id, 
+                        title: `PSUR ${drugTableData.trade_name}: DLP`, 
+                        due_date: nextDlp, 
+                        status: 'To Do', 
+                        created_by: userId 
+                    },
+                    { 
+                        assigned_to, 
+                        drug_id: newDrug.id, 
+                        title: `PSUR ${drugTableData.trade_name}: Deadline`, 
+                        due_date: nextDeadline, 
+                        status: 'To Do', 
+                        created_by: userId 
+                    }
+                ]);
+
+                if (taskError) throw taskError;
+                console.log("📅 Графік та завдання успішно сформовані");
+            }
+
+            // 7. Логування дії в Audit Trail
+            await logAction(userId, userEmail, 'CREATE', 'drugs', newDrug.id, payload);
+
+            return newDrug;
+
+        } catch (error) {
+            console.error("💥 Помилка в useDrugActions:", error.message);
+            throw error;
         }
-        return newDrug;
     };
 
     const updateDrug = async (id, formData, userId, userEmail) => {
+        // Логіка оновлення залишається подібною, з деструктуризацією assigned_to
+        const { assigned_to, ...updateData } = formData;
+        
         const { data: oldData } = await supabase.from('drugs').select('*').eq('id', id).single();
-        const { error } = await supabase.from('drugs').update(formData).eq('id', id);
+        const { error } = await supabase.from('drugs').update(updateData).eq('id', id);
+        
         if (error) throw error;
 
-        // Аудит логіка всередині хука
         await logAction(userId, userEmail, 'UPDATE', 'drugs', id, {
-            trade_name: formData.trade_name,
-            changes: { from: oldData, to: formData }
+            changes: { from: oldData, to: updateData }
         });
     };
 
-    const createSchedule = async (id, drugData, userId) => {
-        const substance = await findBestSubstanceMatch(drugData.active_substance);
-        if (!substance) throw new Error("Речовину не знайдено");
-
-        const { nextDlp, nextDeadline } = calculateNextDates(substance.dlp, substance.frequency);
-
-        // Регламент
-        await supabase.from('active_regulations').insert([{
-            drug_id: id,
-            assigned_to: drugData.assigned_to,
-            type_doc: 'PSUR',
-            dlp_date: nextDlp,
-            submission_deadline: nextDeadline,
-            status: 'В роботі',
-            periodicity: substance.frequency,
-            created_by: userId
-        }]);
-
-        // Таски
-        await supabase.from('tasks').insert([
-            { title: `PSUR ${drugData.trade_name}: DLP`, due_date: nextDlp, drug_id: id, assigned_to: drugData.assigned_to, created_by: userId, status: 'To Do' },
-            { title: `PSUR ${drugData.trade_name}: Deadline`, due_date: nextDeadline, drug_id: id, assigned_to: drugData.assigned_to, created_by: userId, status: 'To Do' }
-        ]);
-        
-        return { nextDlp, nextDeadline };
-    };
-
-    return { createDrugWithSchedule, updateDrug, createSchedule };
-
+    return { createDrugWithSchedule, updateDrug };
 }

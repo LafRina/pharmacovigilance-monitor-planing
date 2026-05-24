@@ -28,6 +28,7 @@ export default function AddDrug({ user }) {
         
         setLoading(true);
         try {
+            console.log("Натиснуто кнопку збереження...");
             await createDrugWithSchedule(formData, user.id, user.email);
             alert('Препарат та графік успішно створено!');
             navigate('/drugslist');
