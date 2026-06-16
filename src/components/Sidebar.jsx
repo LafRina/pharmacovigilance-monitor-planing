@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../api/supabaseClient.js';
 import SidebarSection from './SidebarSection.jsx';
 
-// Іконки 
 import calendarIcon from '../icons/calendar-icon.png';
 import compassIcon from '../icons/compass-icon.png';
 import folderIcon from '../icons/folder-icon.png';
@@ -15,7 +14,7 @@ import './Sidebar.css';
 export default function Sidebar({ userEmail, userRole, isRoleLoading }) {
     const navigate = useNavigate();
 
-    // Локальні стани, щоб інтерфейс не "блимав" при переходах
+    // Локальні стани, щоб інтерфейс не блимав при переходах
     const [localEmail, setLocalEmail] = useState(userEmail);
     const [localRole, setLocalRole] = useState(userRole);
 
@@ -47,7 +46,7 @@ export default function Sidebar({ userEmail, userRole, isRoleLoading }) {
             <div className='sidebar-logo'>M&P PHARMA</div>
 
             <nav className='nav-sidebar'>
-                {/* ГРУПА: ГОЛОВНА */}
+                {/* ГОЛОВНА */}
                 {localRole === 'admin' ? (
                     <SidebarSection to='/admindashboard' icon={compassIcon} end>
                         Головна (Адмін)
@@ -64,14 +63,8 @@ export default function Sidebar({ userEmail, userRole, isRoleLoading }) {
                         Календар
                     </SidebarSection>
                 )}
-                {/* <SidebarSection 
-                    to={localRole === 'admin' ? '/admincalendar' : '/usercalendar'} 
-                    icon={calendarIcon}
-                >
-                    Календар
-                </SidebarSection> */}
 
-                {/* ГРУПА: СПІЛЬНІ РОЗДІЛИ */}
+                {/* СПІЛЬНІ РОЗДІЛИ */}
                 <SidebarSection to='/drugslist' icon={folderIcon}>
                     Реєстр препаратів
                 </SidebarSection>
@@ -82,7 +75,7 @@ export default function Sidebar({ userEmail, userRole, isRoleLoading }) {
                     </SidebarSection>
                 )}
 
-                {/* ГРУПА: ТІЛЬКИ ДЛЯ АДМІНА */}
+                {/* ТІЛЬКИ ДЛЯ АДМІНА */}
                 {localRole === 'admin' && (
                     <SidebarSection to='/allusers' icon={personIcon}>
                         Користувачі

@@ -6,13 +6,13 @@ import { logAction } from '../utils/audit';
 export function useDrugActions() {
     
     const createDrugWithSchedule = async (formData, userId, userEmail) => {
-        console.log("🚀 Початок процесу створення препарату...");
+        console.log("Початок процесу створення препарату...");
 
         try {
-            // 1. Деструктуризація: відокремлюємо assigned_to, бо його немає в таблиці drugs
+            // Деструктуризація: відокремлюємо assigned_to, бо його немає в таблиці drugs
             const { assigned_to, ...drugTableData } = formData;
 
-            // 2. Форматування дат (конвертуємо з DD.MM.YYYY у YYYY-MM-DD для PostgreSQL)
+            // Форматування дат (конвертуємо з DD.MM.YYYY у YYYY-MM-DD для PostgreSQL)
             const formatDate = (dateStr) => {
                 if (!dateStr || !dateStr.includes('.')) return dateStr;
                 return dateStr.split('.').reverse().join('-');
@@ -30,9 +30,9 @@ export function useDrugActions() {
                 created_by: userId
             };
 
-            console.log("📡 Відправка даних у таблицю 'drugs':", payload);
+            console.log("Відправка даних у таблицю 'drugs':", payload);
 
-            // 3. Вставка в таблицю drugs
+            // Вставка в таблицю drugs
             const { data: newDrug, error: drugError } = await supabase
                 .from('drugs')
                 .insert([payload])
@@ -40,16 +40,16 @@ export function useDrugActions() {
                 .single();
 
             if (drugError) throw drugError;
-            console.log("✅ Препарат створено успішно:", newDrug);
+            console.log("Препарат створено успішно:", newDrug);
 
-            // 4. Пошук відповідності діючої речовини для розрахунку регламенту
+            // Пошук відповідності діючої речовини для розрахунку регламенту
             const substance = await findBestSubstanceMatch(drugTableData.active_substance);
             
             if (substance) {
-                console.log("🔍 Знайдено речовину для регламенту:", substance);
+                console.log("Знайдено речовину для регламенту:", substance);
                 const { nextDlp, nextDeadline } = calculateNextDates(substance.dlp, substance.frequency);
 
-                // 5. Створення запису в active_regulations
+                // Створення запису в active_regulations
                 const { error: regError } = await supabase.from('active_regulations').insert([{
                     drug_id: newDrug.id,
                     assigned_to: assigned_to,
@@ -63,7 +63,7 @@ export function useDrugActions() {
 
                 if (regError) throw regError;
 
-                // 6. Створення тасок для календаря
+                // Створення тасок для календаря
                 const { error: taskError } = await supabase.from('tasks').insert([
                     { 
                         assigned_to, 
@@ -84,16 +84,16 @@ export function useDrugActions() {
                 ]);
 
                 if (taskError) throw taskError;
-                console.log("📅 Графік та завдання успішно сформовані");
+                console.log("Графік та завдання успішно сформовані");
             }
 
-            // 7. Логування дії в Audit Trail
+            // Логування дії в Audit Trail
             await logAction(userId, userEmail, 'CREATE', 'drugs', newDrug.id, payload);
 
             return newDrug;
 
         } catch (error) {
-            console.error("💥 Помилка в useDrugActions:", error.message);
+            console.error("Помилка в useDrugActions:", error.message);
             throw error;
         }
     };

@@ -20,7 +20,7 @@
   
   /* Контейнер для навігації */
   .nav-sidebar {
-    flex: 1; /* Займає весь доступний простір, штовхаючи футер вниз */
+    flex: 1;
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
@@ -57,7 +57,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    border-radius: 0 0 0 15px; /* Заокруглення кута, як на макеті */
+    border-radius: 0 0 0 15px;
   }
   
   .user-img {
@@ -88,7 +88,7 @@
 
 .sidebar-footer {
     border-top: 1px solid #ddd;
-    margin-top: auto; /* Штовхає блок до самого низу */
+    margin-top: auto; 
 }
 
 .user-info {

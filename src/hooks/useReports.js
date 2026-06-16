@@ -28,7 +28,7 @@ export function useReports(reportId = null) {
     }, []);
 
     const generateAndSaveReport = async (formData, userId) => {
-        // 1. Отримуємо таски за фільтрами
+        // Отримуємо таски за фільтрами
         let query = supabase
             .from('tasks')
             .select('*, profiles:assigned_to!inner(email)')
@@ -42,7 +42,7 @@ export function useReports(reportId = null) {
         const { data: foundTasks, error: taskError } = await query;
         if (taskError) throw taskError;
 
-        // 2. Зберігаємо звіт
+        // Зберігаємо звіт
         const { error: saveError } = await supabase.from('reports').insert({
             report_name: `Звіт по активності: ${formData.user_email}`,
             user_email: formData.user_email,

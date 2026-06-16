@@ -1,4 +1,3 @@
-import React from 'react';
 import './FilterPanel.css';
 
 export default function FilterPanel({ filters, onChange, options }) {

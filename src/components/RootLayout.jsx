@@ -2,7 +2,8 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 export default function RootLayout({user, userRole, isRoleLoading}){
-    console.log("ROOT LAYOUT ПРИЙНЯВ:", userRole); // Має бути 'admin'
+    console.log("ROOT LAYOUT ПРИЙНЯВ:", userRole); 
+    
     return(
         <div className="app-layout" style={{ display: 'flex' }}>
             <Sidebar userEmail={user?.email} userRole={userRole} isRoleLoading={isRoleLoading}/>

@@ -20,7 +20,6 @@ export default function Notifications({ events, onNotificationClick }) {
                 const daysDiff = differenceInDays(eventDate, today);
 
                 // Умова: сьогодні (0), завтра (1) або через тиждень (7)
-                // Додаємо 0, щоб ти бачила сповіщення про "Додати новий препарат" прямо зараз
                 if (daysDiff === 0 || daysDiff === 1 || daysDiff === 7) {
                     acc.push({
                         id: event.id || Math.random(),
